@@ -1,14 +1,15 @@
 import React from "react";
 import { Grid } from '@mui/material';
-import Card from '@mui/material/Card';
 import { TextField } from "@mui/material";
-import DropdownClass from "../DcuMasterpage/DcuMastersub";
 import { styled } from '@mui/material/styles';
 import Button from '@material-ui/core/Button';
 import { Stack } from "@mui/material";
-import { FormControl } from "@mui/material";
 import Paper from '@mui/material/Paper';
-import MaterialUIPickers from './Date.js';
+import { Box } from "@mui/material";
+import {CssBaseline } from '@mui/material';
+import useStyles from "./UseStyle";
+import InstalledDate from "./InstalledDate";
+import CommisonedDate from "./CommisonedDate";
 
 const Item = styled(Paper)(({ theme }) => ({
     ...theme.typography.body2,
@@ -16,87 +17,138 @@ const Item = styled(Paper)(({ theme }) => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
 }));
+
+
+
 const DcuConfiguration = () => {
-  const clearField = ()=>{
-      alert("elements cleared")
-    } 
-    const addField = ()=>{
-      alert("elements submitted")
-    }
-  
+
+    const classes = useStyles();
     return (
-        <Card >
-            <Grid container direction="column" allignItems="center" justify="center">
+        <card >
+            <Box
+            component="form"
+            sx={{
+                '& .MuiTextField-root': { m: 2, width: '25ch' },
+            }}
+            noValidate
+            autoComplete="off"
+        >
+            <CssBaseline />
+    
+
+            <Box sx={{ display: 'flex', p: 1, m: 1, bgcolor: 'background.paper', flexDirection: 'row', }}>
+            </Box>
+
+            <div>
                 <Grid container direction="row" justifyContent="center" alignContent="center" >
-                    <Grid item xs={4}>
-                        <FormControl>
-                        DCU Serial No :<TextField id="outlined-basic" label="dcu serial no" variant="outlined" />
-                        </FormControl>
-                    </Grid>
+                    <TextField
+                        id="outlined-select-currency-native"
+                        required label="DCU Serial No :"
+                        defaultValue=""
+                    >
 
-                    <Grid Rowspacing={10} Item={Card} item xs={6} md={6} lg={4} rowSpacing={10}>
-                        <Grid item xs={6}>
-                            Select DCU Make :<DropdownClass />
-                        </Grid>
-                    </Grid>
-                </Grid>
-                <Grid container direction="row" justifyContent="center" alignContent="center">
-                    <Grid Item={Card} xs={12} md={6} lg={4} rowSpacing={10}>
-                        <Grid item xs={6}>
-                        Select Type :<DropdownClass /></Grid></Grid>
-                    <Grid Item={Card} xs={12} md={6} lg={4} rowSpacing={10}>
-                        <Grid item xs={6}>
-                        Select Status :<DropdownClass /></Grid></Grid>
-                </Grid>
-                <Grid container direction="row" justifyContent="center" alignContent="center">
-                    <Grid Item={Card} xs={6} md={6} lg={4} rowSpacing={10}>
-                        <Grid item xs={6}>
-                        Latitude(Degrees) :<TextField id="outlined-basic" label="latitude" variant="outlined" />
-                        </Grid></Grid>
-                    <Grid Item={Card} xs={12} md={6} lg={4} rowSpacing={10}>
-                        <Grid item xs={6}>
-                            Longitude(Degrees) :<TextField id="outlined-basic" label="longitude" variant="outlined" />
-                            </Grid></Grid>
-                </Grid>
-                <Grid container direction="row" justifyContent="center" alignContent="center">
-                    <Grid Item={Card} xs={12} md={6} lg={4} rowSpacing={10}>
-                        <Grid item xs={6}>
-                        Installed Date :<MaterialUIPickers />
-                        </Grid></Grid>
-                    <Grid Item={Card} xs={12} md={6} lg={4} rowSpacing={10}>
-                        <Grid item xs={6}>
-                            Commisoned Date :<MaterialUIPickers />
-                            </Grid></Grid>
-                </Grid>
+                    </TextField>
 
-                <Grid container direction="row" justifyContent="center" alignContent="center">
-                <Grid item xs={4}>
-                        <FormControl>
-                        IP Address :<TextField id="outlined-basic" label="Enter Ip Address :" variant="outlined" />
-                        </FormControl>
-                    </Grid>
-                    <Grid item xs={4}>
-                        <FormControl>
-                            Firmware Version :<TextField id="outlined-basic" label="firmware version :" variant="outlined" />
-                        </FormControl>
-                    </Grid>
+                    <TextField
+                        id="outlined-select-currency-native"
+                        select
+                        required label="Select DCU Make :"
+                        SelectProps={{
+                            native: true,
+                        }}
+                    >
+                       
+                    </TextField>
                 </Grid>
-                <Grid container direction="row" justifyContent="center" alignContent="center">
-                <Grid item xs={8}>
-                        <FormControl>
-                        HES Id :<TextField id="outlined-basic" label="hes id" variant="outlined" />
-                        </FormControl>
-                    </Grid>
-                 
+            </div>
+            <Grid container direction="row" justifyContent="center" alignContent="center" >
+                <TextField
+                    id="outlined-select-currency-native"
+                    select
+                    required label="Select Type :"
+                    SelectProps={{
+                        native: true,
+                    }}
+                >
+                </TextField>
+
+
+                <TextField
+                    id="outlined-select-currency-native"
+                    select
+                    required label="Select Status :"
+                    SelectProps={{
+                        native: true,
+                    }}
+                >
+                </TextField>
+            </Grid>
+
+            <Grid container direction="row" justifyContent="center" alignContent="center" >
+            <TextField
+                    id="outlined-select-currency-native"
+                    required label="Latitude(Degrees) :"
+                    SelectProps={{
+                        native: true,
+                    }}
+                >
+                </TextField>
+                <TextField
+                    id="outlined-select-currency-native"
+                    required label="Longitude(Degrees) :"
+                    SelectProps={{
+                        native: true,
+                    }}
+                >
+                </TextField>
+            </Grid>
+
+            <Grid container direction="row" justifyContent="center" alignContent="center" >
+     
+            <InstalledDate />
+
+
+              <CommisonedDate />
+            </Grid>
+
+            <Grid container direction="row" justifyContent="center" alignContent="center" >
+                <div>
+                    <TextField
+                        id="outlined-select-currency-native"
+                        required label="IP Address :"
+                    >
+                    </TextField>
+                    <TextField
+                        id="outlined-select-currency-native"
+                        required label="Firmware Version : "
+                    ></TextField>
+                </div>
+            </Grid>
+
+            
+
+            <Grid container direction="row" justifyContent="center" alignContent="center" >
+                <div>
+                    <TextField
+                        id="outlined-select-currency-native"
+                        required label="HES Id :"
+                    >
+                    </TextField>
+                    
+                </div>
                 </Grid>
-                <Stack spacing={2} direction="row" justifyContent="center">
-                <Button variant="outlined" color="error" onClick={clearField}>Clear</Button>
-                <Button variant="contained" onClick={addField}>Submit</Button>
+                
+          
+            </Box>
+    
+            <Stack spacing={2} direction="row" justifyContent="center">
+                <Button variant="outlined" color="error" >Clear</Button>
+                <Button variant="contained" >Submit</Button>
    
                     
                 </Stack>
-            </Grid>
-        </Card>
+            <br />
+        </card>
     )
 }
 export default DcuConfiguration;

@@ -2,27 +2,16 @@ import React, { useState } from 'react';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
 import IconButton from '@material-ui/core/IconButton';
-import { Stack, Grid,TextField } from '@mui/material';
+import { Stack, Grid, TextField } from '@mui/material';
 import Button from '@material-ui/core/Button';
 import { v4 as uuidv4 } from 'uuid';
 
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        '& .MuiTextField-root': {
-            margin: theme.spacing(1),
-        },
-    },
-    button: {
-        margin: theme.spacing(1),
-    }
-}))
+import useStyles from './UseStyle';
 
 function Status() {
     const classes = useStyles()
     const [inputFields, setInputFields] = useState([
-        { id: uuidv4(), firstName: '' },
+        { id: uuidv4(), type: '' },
     ]);
 
     const handleSubmit = (e) => {
@@ -30,15 +19,13 @@ function Status() {
         console.log("InputFields", inputFields);
     };
 
-    const handleChangeInput = (id, event) => {
-        const newInputFields = inputFields.map(i => {
-            if (id === i.id) {
-                i[event.target.name] = event.target.value
-            }
-            return i;
-        })
+    const handleChangeInput = (index, event) => {
+        const values = [...inputFields];
+        values[index][event.target.name] = event.target.value;
+        setInputFields(values)
 
-        setInputFields(newInputFields);
+
+
     }
 
     const handleAddFields = () => {
@@ -53,23 +40,21 @@ function Status() {
     const clearField = () => {
         alert("elements cleared")
     }
-    const addField = () => {
-        alert("elements submitted")
-    }
+
     return (
         <Grid container direction="column" alignItems="center" justify="center">
             <form className={classes.root} onSubmit={handleSubmit}>
-                {inputFields.map(inputField => (
-                    <div key={inputField.id}>
+                {inputFields.map((inputField,index) => (
+                    <div key={index}>
                         <IconButton disabled={inputFields.length === 1} onClick={() => handleRemoveFields(inputField.id)}>
                             <RemoveCircleIcon />
                         </IconButton>
                         <TextField
-                            name="firstName"
+                            name="type"
                             label="Status"
                             variant="standard"
                             value={inputField.firstName}
-                            onChange={event => handleChangeInput(inputField.id, event)}
+                            onChange={event => handleChangeInput(index, event)}
                         />
 
 
@@ -87,7 +72,7 @@ function Status() {
                             Clear
                         </Button>
 
-                        <Button variant="contained" onClick={addField}>Submit</Button>
+                        <Button variant="contained" onClick={handleSubmit}>Submit</Button>
                     </Stack>
                 </Grid>
             </form>
